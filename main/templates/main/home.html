@@ -1,6 +1,43 @@
-<h1>{{ title }}</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Маркет</title>
+</head>
+<body>
 
-<ul>
-    <li><a href="/page1/">Сторінка 1</a></li>
-    <li><a href="/page2/">Сторінка 2</a></li>
-</ul>
+<!-- 🔹 ХЕДЕР -->
+<header>
+    <h1>Мій маркет</h1>
+
+    <nav>
+        <a href="/">Головна</a>
+
+        <!-- меню категорій -->
+        {% for cat in categories %}
+            <a href="/category/{{ cat.id }}/">{{ cat.title }}</a>
+        {% endfor %}
+    </nav>
+</header>
+
+<hr>
+
+<!-- 🔹 КОНТЕНТ -->
+<h2>Товари:</h2>
+
+{% for product in products %}
+    <div>
+        <h3>{{ product.title }}</h3>
+        <p>{{ product.description }}</p>
+        <p>Ціна: {{ product.price }}</p>
+    </div>
+    <hr>
+{% endfor %}
+
+<!-- 🔹 ФУТЕР -->
+<footer>
+    <p>© 2026 Мій маркет</p>
+    <p>Контакти: example@gmail.com</p>
+</footer>
+
+</body>
+</html>
