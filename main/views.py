@@ -36,3 +36,21 @@ def category_page(request, category_id):
     }
 
     return render(request, "main/home.html", context)
+
+def product_page(request, product_id):
+    product = Product.objects.get(id=product_id)
+    categories = Category.objects.all()
+
+    return render(request, "main/product.html", {
+        "product": product,
+        "categories": categories
+    })
+
+def category_page(request, category_id):
+    products = Product.objects.filter(category_id=category_id)
+    categories = Category.objects.all()
+
+    return render(request, "main/category.html", {
+        "products": products,
+        "categories": categories
+    })

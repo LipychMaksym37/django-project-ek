@@ -1,0 +1,13 @@
+<h1>{{ product.title }}</h1>
+
+{% if product.image %}
+    <img src="{{ product.image.url }}" width="300">
+{% endif %}
+
+<p>{{ product.description }}</p>
+<p>Ціна: {{ product.price }}</p>
+
+<button>Купити</button>
+
+<br><br>
+<a href="/">Назад</a>

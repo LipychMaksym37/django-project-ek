@@ -1,0 +1,20 @@
+<h1>Категорія</h1>
+
+{% for product in products %}
+    <div>
+        <h3>
+            <a href="/product/{{ product.id }}/">
+                {{ product.title }}
+            </a>
+        </h3>
+
+        {% if product.image %}
+            <img src="{{ product.image.url }}" width="150">
+        {% endif %}
+
+        <p>{{ product.price }}</p>
+    </div>
+{% endfor %}
+
+<br>
+<a href="/">На головну</a>

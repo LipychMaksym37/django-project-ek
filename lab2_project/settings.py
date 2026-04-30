@@ -126,3 +126,6 @@ INSTALLED_APPS = [
 
     'main',
 ]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = 'media'

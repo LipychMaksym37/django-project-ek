@@ -35,3 +35,17 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+
+    image = models.ImageField(upload_to='products/', blank=True, null=True)
+
+    class Product(models.Model):
+        title = models.CharField(max_length=200)
+        description = models.TextField()
+        price = models.IntegerField()
+        image = models.ImageField(upload_to='products/', blank=True, null=True)
+
+        category = models.ForeignKey(Category, on_delete=models.CASCADE)
+        seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
+
+        created_at = models.DateTimeField(auto_now_add=True)
+        updated_at = models.DateTimeField(auto_now=True)
