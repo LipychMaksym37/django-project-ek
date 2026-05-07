@@ -1,14 +1,35 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+
 <h1>Кошик</h1>
 
 {% for item in cart_items %}
+
     <div>
+
         <h3>{{ item.product.title }}</h3>
+
+        {% if item.product.image %}
+            <img src="{{ item.product.image.url }}" width="200">
+        {% endif %}
+
         <p>Кількість: {{ item.quantity }}</p>
+
         <p>Ціна: {{ item.product.price }}</p>
+
     </div>
+
     <hr>
+
 {% empty %}
+
     <p>Кошик порожній</p>
+
 {% endfor %}
 
+<br>
+
 <a href="/">На головну</a>
+
+{% endblock %}

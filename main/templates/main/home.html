@@ -1,55 +1,67 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Маркет</title>
-</head>
-<body>
+{% extends "main/base.html" %}
 
-<!-- 🔹 ХЕДЕР -->
-<header>
-    <h1>Мій маркет</h1>
+{% block content %}
 
-    <nav>
-        <a href="/">Головна</a>
+<h2>Товари</h2>
 
-        <!-- меню категорій -->
-        {% for cat in categories %}
-            <a href="/category/{{ cat.id }}/">{{ cat.title }}</a>
-        {% endfor %}
-    </nav>
-</header>
+<!-- Меню категорій -->
+<h3>Категорії</h3>
+
+{% for cat in categories %}
+    <a href="/category/{{ cat.id }}/">
+        {{ cat.title }}
+    </a>
+{% endfor %}
 
 <hr>
 
-<!-- 🔹 КОНТЕНТ -->
-<h2>Товари:</h2>
-
+<!-- Товари -->
 {% for product in products %}
     <div>
-        <h3>{{ product.title }}</h3>
+
+        <h3>
+            <a href="/product/{{ product.id }}/">
+                {{ product.title }}
+            </a>
+        </h3>
+
+        {% if product.image %}
+            <img src="{{ product.image.url }}" width="200">
+        {% endif %}
+
         <p>{{ product.description }}</p>
+
         <p>Ціна: {{ product.price }}</p>
+
+        <a href="/product/{{ product.id }}/">
+            Детальніше
+        </a>
+
     </div>
+
     <hr>
 {% endfor %}
 
-<!-- 🔹 ФУТЕР -->
-<footer>
-    <p>© 2026 Мій маркет</p>
-    <p>Контакти: example@gmail.com</p>
-</footer>
-
-</body>
-</html>
-<a href="/product/{{ product.id }}/">
-    {{ product.title }}
-</a>
+<!-- Підписка -->
 <h3>Підписка на розсилку</h3>
 
 <form action="/subscribe/" method="post">
     {% csrf_token %}
-    <input type="email" name="email" placeholder="Введіть email" required>
-    <button type="submit">Підписатися</button>
+
+    <input
+        type="email"
+        name="email"
+        placeholder="Введіть email"
+        required
+    >
+
+    <button type="submit">
+        Підписатися
+    </button>
 </form>
 
-<a href="/cart/">Кошик</a>
+<br>
+
+<a href="/cart/">Перейти в кошик</a>
+
+{% endblock %}

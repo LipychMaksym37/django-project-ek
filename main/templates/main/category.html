@@ -1,7 +1,24 @@
-<h1>Категорія</h1>
+{% extends "main/base.html" %}
 
+{% block content %}
+
+<h1>Товари категорії</h1>
+
+<!-- Категорії -->
+<h3>Категорії</h3>
+
+{% for cat in categories %}
+    <a href="/category/{{ cat.id }}/">
+        {{ cat.title }}
+    </a>
+{% endfor %}
+
+<hr>
+
+<!-- Товари -->
 {% for product in products %}
     <div>
+
         <h3>
             <a href="/product/{{ product.id }}/">
                 {{ product.title }}
@@ -9,12 +26,29 @@
         </h3>
 
         {% if product.image %}
-            <img src="{{ product.image.url }}" width="150">
+            <img src="{{ product.image.url }}" width="200">
         {% endif %}
 
-        <p>{{ product.price }}</p>
+        <p>{{ product.description }}</p>
+
+        <p>Ціна: {{ product.price }}</p>
+
+        <a href="/product/{{ product.id }}/">
+            Детальніше
+        </a>
+
     </div>
+
+    <hr>
+
+{% empty %}
+
+    <p>У цій категорії поки немає товарів.</p>
+
 {% endfor %}
 
 <br>
+
 <a href="/">На головну</a>
+
+{% endblock %}

@@ -1,3 +1,7 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+
 <h1>{{ product.title }}</h1>
 
 {% if product.image %}
@@ -7,12 +11,8 @@
 <p>{{ product.description }}</p>
 <p>Ціна: {{ product.price }}</p>
 
-<button>Купити</button>
-
-<br><br>
-<a href="/">Назад</a>
-
-<h3>Середня оцінка:
+<h3>
+    Середня оцінка:
     {% if average_rating %}
         {{ average_rating }}
     {% else %}
@@ -23,6 +23,7 @@
 <form method="post">
     {% csrf_token %}
     <label>Оцінити товар:</label>
+
     <select name="rating">
         <option value="1">1</option>
         <option value="2">2</option>
@@ -30,12 +31,23 @@
         <option value="4">4</option>
         <option value="5">5</option>
     </select>
+
     <button type="submit">Оцінити</button>
 </form>
 
+<br>
+
 <form method="post">
     {% csrf_token %}
-    <button type="submit" name="add_to_cart">Купити</button>
+    <button type="submit" name="add_to_cart">
+        Купити
+    </button>
 </form>
 
+<br>
+
 <a href="/cart/">Перейти в кошик</a>
+<br>
+<a href="/">На головну</a>
+
+{% endblock %}
