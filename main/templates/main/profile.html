@@ -1,0 +1,20 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+<h2>Особистий кабінет</h2>
+
+<p>Користувач: {{ user.username }}</p>
+
+<h3>Замовлення</h3>
+
+{% for order in orders %}
+    <div>
+        <p>Товар: {{ order.product.title }}</p>
+        <p>Кількість: {{ order.quantity }}</p>
+        <p>Дата: {{ order.created_at }}</p>
+    </div>
+    <hr>
+{% empty %}
+    <p>Замовлень поки немає.</p>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Мій маркет</title>
+</head>
+<body>
+
+<header>
+    <h1><a href="/">Мій маркет</a></h1>
+
+    <nav>
+        <a href="/">Головна</a>
+        <a href="/cart/">Кошик</a>
+
+        {% if user.is_authenticated %}
+            <a href="/profile/">Особистий кабінет</a>
+            <a href="/logout/">Вийти</a>
+        {% else %}
+            <a href="/login/">Увійти</a>
+            <a href="/register/">Зареєструватись</a>
+        {% endif %}
+    </nav>
+</header>
+
+<hr>
+
+{% block content %}
+{% endblock %}
+
+<hr>
+
+<footer>
+    <p>© 2026 Мій маркет</p>
+    <p>Контакти: example@gmail.com</p>
+</footer>
+
+</body>
+</html>

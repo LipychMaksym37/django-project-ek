@@ -3,6 +3,11 @@ from .models import Product, Category
 from django.shortcuts import render, redirect
 from django.db.models import Avg
 from .models import Product, Category, CartItem, Subscriber, Rating
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordResetForm
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+from .models import Order
 
 def home(request):
     context = {
@@ -92,3 +97,57 @@ def subscribe(request):
         email = request.POST.get("email")
         Subscriber.objects.get_or_create(email=email)
     return redirect('home')
+
+def register_view(request):
+    form = UserCreationForm(request.POST or None)
+
+    if request.method == "POST" and form.is_valid():
+        user = form.save()
+        login(request, user)
+        return redirect("profile")
+
+    return render(request, "main/register.html", {"form": form})
+
+
+def login_view(request):
+    form = AuthenticationForm(request, data=request.POST or None)
+
+    if request.method == "POST" and form.is_valid():
+        login(request, form.get_user())
+        return redirect("profile")
+
+    return render(request, "main/login.html", {"form": form})
+
+
+def logout_view(request):
+    logout(request)
+    return redirect("home")
+
+
+@login_required
+def profile_view(request):
+    if request.user.is_staff:
+        orders = Order.objects.all()
+    else:
+        orders = Order.objects.filter(user=request.user)
+
+    return render(request, "main/profile.html", {"orders": orders})
+
+
+def password_reset_view(request):
+    form = PasswordResetForm(request.POST or None)
+
+    if request.method == "POST" and form.is_valid():
+        form.save(
+            request=request,
+            email_template_name="main/password_reset_email.html"
+        )
+        return redirect("password_reset_done")
+
+    return render(request, "main/password_reset.html", {"form": form})
+
+
+def password_reset_done_view(request):
+    return render(request, "main/password_reset_done.html")
+
+
