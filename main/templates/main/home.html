@@ -44,3 +44,12 @@
 <a href="/product/{{ product.id }}/">
     {{ product.title }}
 </a>
+<h3>Підписка на розсилку</h3>
+
+<form action="/subscribe/" method="post">
+    {% csrf_token %}
+    <input type="email" name="email" placeholder="Введіть email" required>
+    <button type="submit">Підписатися</button>
+</form>
+
+<a href="/cart/">Кошик</a>

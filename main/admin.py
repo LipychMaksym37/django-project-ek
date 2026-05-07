@@ -15,3 +15,9 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('title', 'price', 'created_at', 'updated_at')
+
+    from .models import Seller, Category, Product, CartItem, Subscriber, Rating
+
+    admin.site.register(CartItem)
+    admin.site.register(Subscriber)
+    admin.site.register(Rating)

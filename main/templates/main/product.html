@@ -11,3 +11,31 @@
 
 <br><br>
 <a href="/">Назад</a>
+
+<h3>Середня оцінка:
+    {% if average_rating %}
+        {{ average_rating }}
+    {% else %}
+        Ще немає оцінок
+    {% endif %}
+</h3>
+
+<form method="post">
+    {% csrf_token %}
+    <label>Оцінити товар:</label>
+    <select name="rating">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+    </select>
+    <button type="submit">Оцінити</button>
+</form>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" name="add_to_cart">Купити</button>
+</form>
+
+<a href="/cart/">Перейти в кошик</a>
