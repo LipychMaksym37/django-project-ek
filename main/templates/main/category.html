@@ -2,53 +2,42 @@
 
 {% block content %}
 
-<h1>Товари категорії</h1>
+<h2>Сторінка категорії</h2>
 
-<!-- Категорії -->
 <h3>Категорії</h3>
 
 {% for cat in categories %}
-    <a href="/category/{{ cat.id }}/">
-        {{ cat.title }}
-    </a>
+    <a href="/category/{{ cat.id }}/">{{ cat.title }}</a>
 {% endfor %}
 
 <hr>
 
-<!-- Товари -->
-{% for product in products %}
-    <div>
+<h3>Товари цієї категорії</h3>
 
-        <h3>
+<div class="products-grid">
+    {% for product in products %}
+        <div class="product-card">
+            <h3>
+                <a href="/product/{{ product.id }}/">{{ product.title }}</a>
+            </h3>
+
+            {% if product.image %}
+                <img src="{{ product.image.url }}" width="200">
+            {% endif %}
+
+            <p>{{ product.description|truncatechars:70 }}</p>
+            <p><b>{{ product.price }} грн</b></p>
+
             <a href="/product/{{ product.id }}/">
-                {{ product.title }}
+                <button>Детальніше</button>
             </a>
-        </h3>
-
-        {% if product.image %}
-            <img src="{{ product.image.url }}" width="200">
-        {% endif %}
-
-        <p>{{ product.description }}</p>
-
-        <p>Ціна: {{ product.price }}</p>
-
-        <a href="/product/{{ product.id }}/">
-            Детальніше
-        </a>
-
-    </div>
-
-    <hr>
-
-{% empty %}
-
-    <p>У цій категорії поки немає товарів.</p>
-
-{% endfor %}
+        </div>
+    {% empty %}
+        <p>У цій категорії поки немає товарів.</p>
+    {% endfor %}
+</div>
 
 <br>
-
 <a href="/">На головну</a>
 
 {% endblock %}

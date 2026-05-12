@@ -8,6 +8,8 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, Pass
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .models import Order
+from django.contrib.auth import login, logout
+from .models import Product, Category, CartItem
 
 def home(request):
     context = {
@@ -149,5 +151,9 @@ def password_reset_view(request):
 
 def password_reset_done_view(request):
     return render(request, "main/password_reset_done.html")
+
+def cart_page(request):
+    cart_items = CartItem.objects.all()
+    return render(request, "main/cart.html", {"cart_items": cart_items})
 
 

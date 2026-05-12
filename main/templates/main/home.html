@@ -2,66 +2,49 @@
 
 {% block content %}
 
-<h2>Товари</h2>
+<h2>Головна сторінка маркету</h2>
 
-<!-- Меню категорій -->
 <h3>Категорії</h3>
 
 {% for cat in categories %}
-    <a href="/category/{{ cat.id }}/">
-        {{ cat.title }}
-    </a>
+    <a href="/category/{{ cat.id }}/">{{ cat.title }}</a>
 {% endfor %}
 
 <hr>
 
-<!-- Товари -->
-{% for product in products %}
-    <div>
+<h3>Товари</h3>
 
-        <h3>
-            <a href="/product/{{ product.id }}/">
-                {{ product.title }}
-            </a>
-        </h3>
+<div class="products-grid">
+    {% for product in products %}
+        <div class="product-card">
+            <h3>
+                <a href="/product/{{ product.id }}/">{{ product.title }}</a>
+            </h3>
 
-        {% if product.image %}
+                  {% if product.image %}
             <img src="{{ product.image.url }}" width="200">
-        {% endif %}
+                  {% endif %}
 
-        <p>{{ product.description }}</p>
+            <p>{{ product.description|truncatechars:70 }}</p>
+            <p><b>{{ product.price }} грн</b></p>
 
-        <p>Ціна: {{ product.price }}</p>
+            <a href="/product/{{ product.id }}/">
+                <button>Детальніше</button>
+            </a>
+        </div>
+    {% empty %}
+        <p>Товарів поки немає.</p>
+    {% endfor %}
+</div>
 
-        <a href="/product/{{ product.id }}/">
-            Детальніше
-        </a>
+<div class="form-card">
+    <h3>Підписка на розсилку</h3>
 
-    </div>
-
-    <hr>
-{% endfor %}
-
-<!-- Підписка -->
-<h3>Підписка на розсилку</h3>
-
-<form action="/subscribe/" method="post">
-    {% csrf_token %}
-
-    <input
-        type="email"
-        name="email"
-        placeholder="Введіть email"
-        required
-    >
-
-    <button type="submit">
-        Підписатися
-    </button>
-</form>
-
-<br>
-
-<a href="/cart/">Перейти в кошик</a>
+    <form action="/subscribe/" method="post">
+        {% csrf_token %}
+        <input type="email" name="email" placeholder="Введіть email" required>
+        <button type="submit">Підписатися</button>
+    </form>
+</div>
 
 {% endblock %}

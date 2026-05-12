@@ -2,49 +2,45 @@
 
 {% block content %}
 
-<h1>{{ product.title }}</h1>
+<div class="product-card">
+    <h2>{{ product.title }}</h2>
 
-{% if product.image %}
-    <img src="{{ product.image.url }}" width="300">
-{% endif %}
-
-<p>{{ product.description }}</p>
-<p>Ціна: {{ product.price }}</p>
-
-<h3>
-    Середня оцінка:
-    {% if average_rating %}
-        {{ average_rating }}
-    {% else %}
-        Ще немає оцінок
+    {% if product.image %}
+        <img src="{{ product.image.url }}" width="320">
     {% endif %}
-</h3>
 
-<form method="post">
-    {% csrf_token %}
-    <label>Оцінити товар:</label>
+    <p>{{ product.description }}</p>
+    <p><b>Ціна:</b> {{ product.price }} грн</p>
 
-    <select name="rating">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-    </select>
+    <h3>
+        Середня оцінка:
+        {% if average_rating %}
+            {{ average_rating }}
+        {% else %}
+            Ще немає оцінок
+        {% endif %}
+    </h3>
 
-    <button type="submit">Оцінити</button>
-</form>
+    <form method="post">
+        {% csrf_token %}
+        <label>Оцінити товар:</label>
+        <select name="rating">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <button type="submit">Оцінити</button>
+    </form>
 
-<br>
+    <br>
 
-<form method="post">
-    {% csrf_token %}
-    <button type="submit" name="add_to_cart">
-        Купити
-    </button>
-</form>
-
-<br>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" name="add_to_cart">Купити</button>
+    </form>
+</div>
 
 <a href="/cart/">Перейти в кошик</a>
 <br>

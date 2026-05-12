@@ -1,3 +1,19 @@
-<h1>{{ title }}</h1>
+{% extends "main/base.html" %}
 
-<a href="/">Назад на головну</a>
+{% block content %}
+
+<div class="product-card">
+
+    <h1>{{ title }}</h1>
+
+    <p>
+        Це сторінка {{ title }}
+    </p>
+
+    <a href="/">
+        <button>На головну</button>
+    </a>
+
+</div>
+
+{% endblock %}

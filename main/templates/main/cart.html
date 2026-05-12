@@ -2,33 +2,22 @@
 
 {% block content %}
 
-<h1>Кошик</h1>
+<h2>Кошик</h2>
 
 {% for item in cart_items %}
-
-    <div>
-
+    <div class="cart-item">
         <h3>{{ item.product.title }}</h3>
 
         {% if item.product.image %}
             <img src="{{ item.product.image.url }}" width="200">
         {% endif %}
 
-        <p>Кількість: {{ item.quantity }}</p>
-
-        <p>Ціна: {{ item.product.price }}</p>
-
+        <p><b>Кількість:</b> {{ item.quantity }}</p>
+        <p><b>Ціна:</b> {{ item.product.price }} грн</p>
     </div>
-
-    <hr>
-
 {% empty %}
-
-    <p>Кошик порожній</p>
-
+    <p>Кошик порожній.</p>
 {% endfor %}
-
-<br>
 
 <a href="/">На головну</a>
 

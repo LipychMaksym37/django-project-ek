@@ -1,20 +1,21 @@
 {% extends "main/base.html" %}
 
 {% block content %}
+
 <h2>Особистий кабінет</h2>
 
-<p>Користувач: {{ user.username }}</p>
+<p><b>Користувач:</b> {{ user.username }}</p>
 
 <h3>Замовлення</h3>
 
 {% for order in orders %}
-    <div>
-        <p>Товар: {{ order.product.title }}</p>
-        <p>Кількість: {{ order.quantity }}</p>
-        <p>Дата: {{ order.created_at }}</p>
+    <div class="order-card">
+        <p><b>Товар:</b> {{ order.product.title }}</p>
+        <p><b>Кількість:</b> {{ order.quantity }}</p>
+        <p><b>Дата:</b> {{ order.created_at }}</p>
     </div>
-    <hr>
 {% empty %}
     <p>Замовлень поки немає.</p>
 {% endfor %}
+
 {% endblock %}
